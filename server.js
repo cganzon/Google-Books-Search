@@ -31,6 +31,12 @@ app.post("/api/books", (req, res) => {
     .catch(err => res.json(err));
 });
 
+// app.remove("/api/books/:id", (req, res) => {
+//     db.Book
+//       .create(req.body).then(dbBook => res.json(dbBook))
+//       .catch(err => res.json(err));
+//   });
+
 app.get("/search", (req, res) => {
     // set bookTitle to the req.body.title with spaces replaced with plus signs(+)
     axios.get(
