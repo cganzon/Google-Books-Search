@@ -3,6 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
+const axios = require("axios");
 const db = require("./models");
 
 // Our connection to our database
@@ -26,15 +27,24 @@ app.get("/api/books", (req, res) => {
 
 app.post("/api/books", (req, res) => {
   db.Book
-    .create({
-      title: req.body.title,
-      authors: req.body.authors,
-      description: req.body.description,
-      image: req.body.image,
-      link: req.body.link,
-    }).then(dbBook => res.json(dbBook))
+    .create(req.body).then(dbBook => res.json(dbBook))
     .catch(err => res.json(err));
-})
+});
+
+app.get("/search", (req, res) => {
+    // set bookTitle to the req.body.title with spaces replaced with plus signs(+)
+    axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${req.body.title}&key=AIzaSyAlMY86guY9t-Iro_uOUeCvGbY3RVMa_6Q`
+    ).then(
+        (response) => {
+            res.json(response.data.items)
+        }
+    ).catch(
+        (err) => {
+            res.json({error: error})
+        }
+    );
+});
 
 // Send every other request to the React app
 // Define any API routes before this runs
