@@ -3,10 +3,10 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
-// const db = require("./models");
+const db = require("./models");
 
 // Our connection to our database
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/booksDB", {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/googlebooks", {useNewUrlParser: true});
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -16,24 +16,23 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Define API routes here
-// /api/members which will be a GET route that 
-app.get("/api/members", (req, res) => {
- // returns of your members in your group as JSON data
- db.Member
+//Routes
+app.get("/api/books", (req, res) => {
+ db.Book
   .find({})
-  .then(dbMembers => res.json(dbMembers))
+  .then(dbBooks => res.json(dbBooks))
   .catch(err => res.json(err));
 });
 
-// /api/new which will be a POST route that will enable you add a member to your group and responds back with the added member
-app.post("/api/new", (req, res) => {
-  db.Member
+app.post("/api/books", (req, res) => {
+  db.Book
     .create({
-      name: req.body.name,
-      github: req.body.github,
-      linkedin: req.body.linkedin
-    }).then(dbMember => res.json(dbMember))
+      title: req.body.title,
+      authors: req.body.authors,
+      description: req.body.description,
+      image: req.body.image,
+      link: req.body.link,
+    }).then(dbBook => res.json(dbBook))
     .catch(err => res.json(err));
 })
 
