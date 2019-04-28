@@ -13,18 +13,18 @@ function App() {
   return (
     <div>
       <Router>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-          <Link to="/" class="navbar-brand">Google Books Search</Link>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+          <Link to="/" className="navbar-brand">Google Books Search</Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Link to="/search" class="nav-link active">Search</Link>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/search" className="nav-link active">Search</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/saved" class="nav-link active">View Saved Books</Link>
+              <li className="nav-item">
+                <Link to="/saved" className="nav-link active">View Saved Books</Link>
               </li>
             </ul>
           </div>

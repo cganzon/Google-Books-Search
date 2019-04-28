@@ -38,12 +38,11 @@ app.post("/api/books", (req, res) => {
 //   });
 
 app.get("/search", (req, res) => {
-    // set bookTitle to the req.body.title with spaces replaced with plus signs(+)
     axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${req.body.title}&key=AIzaSyAlMY86guY9t-Iro_uOUeCvGbY3RVMa_6Q`
     ).then(
         (response) => {
-            res.json(response.data.items)
+            res.send(response.data.items)
         }
     ).catch(
         (err) => {
